@@ -13,6 +13,8 @@ export function TransactionForm({ onSuccess }: TransactionFormProps) {
   const [date, setDate] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [category, setCategory] = useState<string>("");
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export function TransactionForm({ onSuccess }: TransactionFormProps) {
         amount: parseFloat(amount),
         date,
         description,
+        category,
       }),
     });
 
@@ -50,7 +53,21 @@ export function TransactionForm({ onSuccess }: TransactionFormProps) {
       <Input type="number" placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
       <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
       <Input placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-      <Button type="submit">Add Transaction</Button>
+      <select
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+  className="border rounded px-2 py-1 w-full"
+>
+  <option value="">Select category</option>
+  <option value="Food">Food</option>
+  <option value="Utilities">Utilities</option>
+  <option value="Transport">Transport</option>
+  <option value="Entertainment">Entertainment</option>
+  <option value="Other">Other</option>
+</select>
+<Button type="submit">Add Transaction</Button>
+
     </form>
+
   );
 }

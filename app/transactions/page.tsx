@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { TransactionForm } from "./components/TransactionForm";
 import { TransactionList } from "./components/TransactionList";
 import { MonthlyChart } from "./components/MonthlyChart";
+import Dashboard from "./components/dashboard";
+
 
 export default function TransactionsPage() {
   const [transactions, setTransactions] = useState([]);
@@ -14,6 +16,7 @@ export default function TransactionsPage() {
     setTransactions(data);
   };
 
+  
   useEffect(() => {
     fetchTransactions();
   }, []);
@@ -24,6 +27,11 @@ export default function TransactionsPage() {
       <TransactionForm onSuccess={fetchTransactions} />
       <MonthlyChart transactions={transactions} />
       <TransactionList transactions={transactions} onChange={fetchTransactions} />
+      <section className="pt-10">
+        <h2 className="text-2xl font-bold mb-4">Dashboard Overview</h2>
+        <Dashboard />
+      </section>
+
     </div>
   );
 }
